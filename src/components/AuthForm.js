@@ -19,7 +19,7 @@ const AuthForm = ({
   return (
     <div className="auth">
       <h2 className="auth__title">{title}</h2>
-      <form className="form form_type_auth">
+      <form className="form form_type_auth" onSubmit={submitHanlder}>
         <div className="form__auth-inputs-wrapper">
           <input 
             value={email}
@@ -38,7 +38,7 @@ const AuthForm = ({
           />
           <span className="form__error username-error">Заполните это поле</span>
         </div>
-        <button className="form__button form__button_type_auth" onClick={submitHanlder}>{submitTitle}</button>
+        <button className="form__button form__button_type_auth">{submitTitle}</button>
       </form>
       <NavLink to="/sign-in" className={`link ${title === 'Регистрация' ? '' : 'link_hidden'}`}>Уже зарегистрированы? Войти</NavLink>
     </div>

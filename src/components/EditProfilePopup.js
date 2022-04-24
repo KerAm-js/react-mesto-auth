@@ -16,7 +16,6 @@ const EditProfilePopup = ({isOpened, onClose, onUpdateUser}) => {
       name,
       about: description,
     });
-    onClose();
   }
 
   useEffect(() => {

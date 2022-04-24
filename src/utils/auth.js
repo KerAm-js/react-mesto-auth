@@ -1,7 +1,16 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
+const checkResponse = (res) => {
+  try {
+    if (res.ok) {
+      return res.json()
+    }
+  } catch (e) {
+    return Promise.reject(e)
+  }
+}
+
 export const reg = (email, password) => {
-  console.log(email, password);
   return fetch(`${BASE_URL}/signup`, {
       method: 'POST',
       headers: {
@@ -13,20 +22,11 @@ export const reg = (email, password) => {
       })
     })
       .then(res => {
-        try {
-          if (res.status.toString()[0] === '2' ) {
-            return res.json();
-          }
-        } catch(e) {
-          return e
-        }
+        return checkResponse(res);
       })
-      .then(res => {
-        return res
-      })
-      .catch(e => {
-        return e
-      })
+      // .then(res => {
+      //   return res
+      // })
 }
 
 export const auth = (email, password) => {
@@ -41,20 +41,11 @@ export const auth = (email, password) => {
       })
     })
       .then(res => {
-        try {
-          if (res.status.toString()[0] === '2' ) {
-            return res.json()
-          }
-        } catch(e) {
-          return e
-        }
+        return checkResponse(res);
       })
-      .then(res => {
-        return res
-      })
-      .catch(e => {
-        return e
-      })
+      // .then(res => {
+      //   return res
+      // })
 }
 
 export const authWithJWT = (jwt) => {
@@ -66,18 +57,9 @@ export const authWithJWT = (jwt) => {
     }
   })
     .then(res => {
-      try {
-        if (res.status.toString()[0] === '2') {
-          return res.json()
-        }
-      } catch (e) {
-        return e
-      }
+      return checkResponse(res);
     })
-    .then(res => {
-      return res
-    })
-    .catch(e => {
-      return e
-    })
+    // .then(res => {
+    //   return res
+    // })
 }

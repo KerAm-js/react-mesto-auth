@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 410px){
+@media screen and (max-width: 536px){
   .header__account-info {
     flex-direction: column;
     padding: 40px 0;

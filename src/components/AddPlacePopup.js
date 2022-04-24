@@ -12,16 +12,11 @@ const AddPlacePopup = ({isOpened, onClose, onAddPlace}) => {
   const handleSubmit = evt => {
     evt.preventDefault();
     onAddPlace(name, link);
-    onClose();
   }
 
   useEffect(() => {
     setName('');
     setLink('');
-    return () => {
-      setName('');
-      setLink('');
-    }
   }, [isOpened])
  
   return (

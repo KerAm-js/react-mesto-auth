@@ -24,12 +24,12 @@ function App() {
   const [accountInfoVisible, setAccountInfoVisible] = useState(false);
   const [action, setAction] = useState(() => () => {});
   const [cards, setCards] = useState([]);
-  const [infoTooltip, setInfoTooltip] = useState('');
+  const [infoTooltip, setInfoTooltip] = useState('success');
   const [isEditProfilePopupOpened, setIsEditProfilePopupOpened] = useState(false);
   const [isEditAvatarPopupOpened, setIsEditAvatarPopupOpened] = useState(false);
   const [isAddPlaceopupOpened, setIsAddPlaceopupOpened] = useState(false);
   const [isConfirmPopupOpened, setIsConfirmPopupOpened] = useState(false);
-  const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(false);
+  const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(true);
   const [selectedCard, setSelectedCard] = useState(null);
   const [authEmail, setAuthEmail] = useState('');
   const [authPassword, setAuthPassword] = useState('');
@@ -62,7 +62,7 @@ function App() {
   }
 
   const openInfoTooltip = status => { 
-    setInfoTooltip(status ? 'success' : 'error');
+    setInfoTooltip(status);
     setIsInfoTooltipOpened(true);
   }
 
@@ -77,19 +77,28 @@ function App() {
 
   const handleUpdateUser = ({name, about}) => {
     api.editProfile(name, about)
-      .then(userData => setCurrentUser(userData))
+      .then(userData => {
+        setCurrentUser(userData)
+        closeAllPopups()
+      })
       .catch(e => console.log(e))
   }
 
   const handleUpdateAvatar = avatar => {
     api.editAvatar(avatar) 
-      .then(userData => setCurrentUser(userData))
+      .then(userData => {
+        setCurrentUser(userData)
+        closeAllPopups()
+      })
       .catch(e => console.log(e))
   }
 
   const handleAddPlace = (name, link) => {
     api.addCard(name, link)
-      .then(card => setCards([card, ...cards]))
+      .then(card => {
+        setCards([card, ...cards])
+        closeAllPopups()
+      })
       .catch(e => console.log(e))
   }
 
@@ -152,18 +161,23 @@ function App() {
           history.push('/')
         }
       })
-      .catch(e => console.log(e))
+      .catch(e => {
+        console.log(e)
+      })
   }
 
   const register = () => {
     reg(registerEmail, registerPassword) 
       .then(res => {
-        console.log(res)
+        openInfoTooltip('success')
         clearRegisterInputs()
         setAuthEmail(res.data.email)
         history.push('/signin')
       })
-      .catch(e => console.log(e))
+      .catch(e => {
+        console.log(e)
+        openInfoTooltip('error')
+      })
   }
 
   const autoAuth = () => {
@@ -173,7 +187,6 @@ function App() {
         .then(res => {
           if (res.data.email) {
             setCurrentUserEmail(res.data.email)
-            console.log(res.data.email);
             setLoggedIn(true)
             history.push('/')
           }
@@ -193,6 +206,12 @@ function App() {
 
   const toggleAccountInfoVisible = () => setAccountInfoVisible(!accountInfoVisible);
 
+  const closeByEscape = (evt) => {
+    if (evt.key === 'Escape') {
+      closeAllPopups();
+    }
+  }
+
   useEffect(() => {
     api.getUserData()
       .then(userData => setCurrentUser(userData))
@@ -201,6 +220,10 @@ function App() {
       .then(cards => setCards(cards))
       .catch(e => console.log(e))
     autoAuth();
+    document.addEventListener('keydown', closeByEscape);
+    return () => {
+      document.removeEventListener('keydown', closeByEscape);
+    }
   }, [])
 
   return (

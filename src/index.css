@@ -29,7 +29,7 @@
 @import url('./blocks/modal/_opened/modal_opened.css');
 @import url('./blocks/modal/__block/modal__block.css');
 @import url('./blocks/modal/__block/_type/modal__block_type_tooltip.css');
-@import url('./blocks/modal/__content-layout/modal__content-layout.css');
+@import url('./blocks/modal/__container/modal__container.css');
 @import url('./blocks/modal/__title/modal__title.css');
 @import url('./blocks/modal/__title/_type/modal__title_type_tooltip.css');
 @import url('./blocks/modal/__image/modal__image.css');

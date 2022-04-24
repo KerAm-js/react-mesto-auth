@@ -10,10 +10,15 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 768px) {
+  .header__account-button {
+    margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 536px) {
   .header__account-button {
     margin-top: 0;
-    margin-right: 30px;
     font-size: 14px;
     line-height: 17px;
   }

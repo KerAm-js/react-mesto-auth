@@ -12,13 +12,11 @@ const EditAvatarPopup = ({
   const handleSubmit = evt => {
     evt.preventDefault();
     onUpdateAvatar(link.current.value);
-    onClose();
   }
 
   useEffect(() => {
     link.current.value = '';
-    return () => {link.current.value = ''};
-  })
+  }, [isOpened])
 
   return (
     <PopupWithForm 

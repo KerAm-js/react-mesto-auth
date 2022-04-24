@@ -1,8 +1,7 @@
 .modal__block {
   z-index: 10;
   position: relative;
-  width: 100%;
-  max-width: 430px;
+  min-width: 430px;
   padding: 34px 36px 37px;
   margin: 0;
   box-sizing: border-box;
@@ -16,6 +15,6 @@
 @media screen and (max-width: 575px) {
   .modal__block {
     padding: 25px 22px;
-    max-width: 282px;
+    min-width: 282px;
   }
 }
