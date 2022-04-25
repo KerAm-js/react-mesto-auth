@@ -5,8 +5,9 @@ const checkResponse = (res) => {
     if (res.ok) {
       return res.json()
     }
+    return Promise.reject(`Ошибка: ${res.status}`)
   } catch (e) {
-    return Promise.reject(e)
+    return e;
   }
 }
 
@@ -24,9 +25,6 @@ export const reg = (email, password) => {
       .then(res => {
         return checkResponse(res);
       })
-      // .then(res => {
-      //   return res
-      // })
 }
 
 export const auth = (email, password) => {
@@ -43,9 +41,6 @@ export const auth = (email, password) => {
       .then(res => {
         return checkResponse(res);
       })
-      // .then(res => {
-      //   return res
-      // })
 }
 
 export const authWithJWT = (jwt) => {
@@ -59,7 +54,4 @@ export const authWithJWT = (jwt) => {
     .then(res => {
       return checkResponse(res);
     })
-    // .then(res => {
-    //   return res
-    // })
 }

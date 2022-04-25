@@ -24,12 +24,12 @@ function App() {
   const [accountInfoVisible, setAccountInfoVisible] = useState(false);
   const [action, setAction] = useState(() => () => {});
   const [cards, setCards] = useState([]);
-  const [infoTooltip, setInfoTooltip] = useState('success');
+  const [infoTooltip, setInfoTooltip] = useState('');
   const [isEditProfilePopupOpened, setIsEditProfilePopupOpened] = useState(false);
   const [isEditAvatarPopupOpened, setIsEditAvatarPopupOpened] = useState(false);
   const [isAddPlaceopupOpened, setIsAddPlaceopupOpened] = useState(false);
   const [isConfirmPopupOpened, setIsConfirmPopupOpened] = useState(false);
-  const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(true);
+  const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [authEmail, setAuthEmail] = useState('');
   const [authPassword, setAuthPassword] = useState('');
